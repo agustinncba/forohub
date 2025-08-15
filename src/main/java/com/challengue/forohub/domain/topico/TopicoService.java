@@ -82,4 +82,12 @@ public class TopicoService {
         topico.actualizarDatos(datosActualizarTopico);
         return new DatosRespuestaTopico(topico);
     }
+
+    @Transactional
+    public void eliminarTopico(Long id) {
+        if (!topicoRepository.existsById(id)) {
+            throw new EntityNotFoundException("No se encontró un tópico con el ID proporcionado para eliminar.");
+        }
+        topicoRepository.deleteById(id);
+    }
 }
