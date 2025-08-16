@@ -31,7 +31,9 @@ public class SecurityConfigurations {
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
+                        .anyRequest()
+                        .authenticated()
                 )
                 // Añadimos nuestro filtro antes del filtro de Spring por defecto
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
