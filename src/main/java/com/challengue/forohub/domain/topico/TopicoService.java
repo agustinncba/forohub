@@ -44,30 +44,25 @@ public class TopicoService {
             throw new EntityNotFoundException("No se encontró el curso con id");
         }
 
-        Topico topico = new Topico();
-        topico.setMensaje(datos.mensaje());
-        topico.setTitulo(datos.titulo());
-        topico.setAutor(autor.get());
-        topico.setCurso(curso.get());
-
+        Topico topico = new Topico(datos, curso.get(), autor.get());
         topicoRepository.save(topico);
         return topico;
     }
 
-    public List<DatosListadoTopico> listarTopicos() {
+    public List<DatosDetalleTopico> listarTopicos() {
         return topicoRepository.findAll().stream()
-                .map(DatosListadoTopico::new)
+                .map(DatosDetalleTopico::new)
                 .collect(Collectors.toList());
     }
 
-    public List<DatosListadoTopico> listarTopicosPaginado(Pageable pageable) {
+    public Page<DatosDetalleTopico> listarTopicosPaginado(Pageable pageable) {
         Page<Topico> topicosPaginados = topicoRepository.findAll(pageable);
-        return topicosPaginados.stream().map(DatosListadoTopico::new).toList();
+        return topicosPaginados.map(DatosDetalleTopico::new);
     }
 
-    public DatosTopico datosTopico(Long id) {
+    public DatosDetalleTopico datosTopico(Long id) {
         return topicoRepository.findById(id)
-                .map(topico -> new DatosTopico(topico))
+                .map(DatosDetalleTopico::new)
                 .orElseThrow(() -> new EntityNotFoundException("No se encontró un tópico con el ID: " + id));
     }
 

@@ -34,22 +34,22 @@ public class TopicoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<DatosListadoTopico>> listarTopicos() {
-        List<DatosListadoTopico> topicos = topicoService.listarTopicos();
+    public ResponseEntity<List<DatosDetalleTopico>> listarTopicos() {
+        List<DatosDetalleTopico> topicos = topicoService.listarTopicos();
         return ResponseEntity.ok(topicos);
     }
 
     @GetMapping("/paginado")
-    public ResponseEntity<List<DatosListadoTopico>> listarTopicosPaginados(
+    public ResponseEntity<Page<DatosDetalleTopico>> listarTopicosPaginados(
             @PageableDefault(size = 5, sort = {"fechaCreacion"}) Pageable pageable) {
-        List<DatosListadoTopico> topicosPaginados = topicoService.listarTopicosPaginado(pageable);
+        Page<DatosDetalleTopico> topicosPaginados = topicoService.listarTopicosPaginado(pageable);
         return ResponseEntity.ok(topicosPaginados);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DatosTopico> datosTopico(@PathVariable Long id) {
-        DatosTopico datosTopico = topicoService.datosTopico(id);
-        return ResponseEntity.ok(datosTopico);
+    public ResponseEntity<DatosDetalleTopico> datosTopico(@PathVariable Long id) {
+        DatosDetalleTopico DatosDetalleTopico = topicoService.datosTopico(id);
+        return ResponseEntity.ok(DatosDetalleTopico);
     }
 
     @PutMapping("/{id}")

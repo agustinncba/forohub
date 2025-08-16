@@ -43,6 +43,13 @@ public class Topico {
     @Enumerated(EnumType.STRING)
     private TopicoStatus status;
 
+    public Topico(DatosRegistroTopico DatosRegistroTopico, Curso curso, Usuario autor) {
+        this.titulo = DatosRegistroTopico.titulo();
+        this.mensaje = DatosRegistroTopico.mensaje();
+        this.curso = curso;
+        this.autor = autor;
+    }
+
     @PrePersist
     public void setearValoresPorDefecto() {
         this.fechaCreacion = LocalDateTime.now();
