@@ -35,6 +35,12 @@ public class Usuario implements UserDetails {
     )
     private List<Perfil> perfiles;
 
+    public Usuario(DatosRegistroUsuario datosRegistroUsuario, String contrasenaEncriptada) {
+        this.nombre = datosRegistroUsuario.nombre();
+        this.correoElectronico = datosRegistroUsuario.correoElectronico();
+        this.contrasena = contrasenaEncriptada;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return perfiles;

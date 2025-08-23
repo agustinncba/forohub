@@ -1,6 +1,7 @@
 package com.challengue.forohub.infra.exceptions;
 
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -25,6 +26,11 @@ public class TratadorDeErrores {
                 .map(DatosErrorValidacion::new)
                 .toList();
         return ResponseEntity.badRequest().body(errores);
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<String> tratarErrorDeValidacionDeNegocio(ValidationException e) {
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
     }
 
     private record DatosErrorValidacion(String campo, String error) {
