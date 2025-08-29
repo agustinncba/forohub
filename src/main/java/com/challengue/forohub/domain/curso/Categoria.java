@@ -6,5 +6,5 @@ public enum Categoria {
     DATA_SCIENCE,
     INNOVACION_Y_GESTION,
     DEVOPS,
-    OFF_TOPIC
+    OFF_TOPIC;
 }

@@ -22,4 +22,14 @@ public class Curso {
 
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
+
+    public Curso(DatosNuevoCurso datosNuevoCurso) {
+        this.nombre = datosNuevoCurso.nombre();
+        this.categoria = datosNuevoCurso.categoria();
+    }
+
+    public void ActualizarDatos(DatosActualizarCurso datosActualizarCurso) {
+        this.nombre = datosActualizarCurso.nombre();
+        this.categoria = datosActualizarCurso.categoria();
+    }
 }
