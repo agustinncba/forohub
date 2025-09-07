@@ -38,6 +38,12 @@ public class Respuesta {
     @PrePersist
     public void setearValoresPorDefecto() {
         this.fechaCreacion = LocalDateTime.now();
-        this.solucion = false;
+    }
+
+    public Respuesta(Topico topico, Usuario autor, DatosRegistroRespuesta datosRegistroRespuesta) {
+        this.mensaje = datosRegistroRespuesta.mensaje();
+        this.topico = topico;
+        this.autor = autor;
+        this.solucion = datosRegistroRespuesta.solucion();
     }
 }

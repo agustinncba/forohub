@@ -1,6 +1,7 @@
 package com.challengue.forohub.domain.topico;
 
 import com.challengue.forohub.domain.curso.Curso;
+import com.challengue.forohub.domain.respuesta.DatosRegistroRespuesta;
 import com.challengue.forohub.domain.respuesta.Respuesta;
 import com.challengue.forohub.domain.usuario.Usuario;
 import jakarta.persistence.*;
@@ -62,6 +63,12 @@ public class Topico {
         }
         if (datosActualizarTopico.mensaje() != null) {
             this.mensaje = datosActualizarTopico.mensaje();
+        }
+    }
+
+    public void agregarRespuesta(Respuesta respuesta) {
+        if (respuesta.getMensaje() != null) {
+            this.respuestas.add(respuesta);
         }
     }
 }
